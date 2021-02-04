@@ -28,10 +28,42 @@
     <script>
       $('input[name="dates"]').daterangepicker();
       $(function () {
+        let holidays = [
+          "11 Mar 2021",
+          "02 Apr 2021",
+          "13 Apr 2021",
+          "13 May 2021",
+          "10 Sep 2021",
+          "15 Oct 2021",
+          "04 Nov 2021",
+        ];
+
         $('input[name="daterange"]').daterangepicker(
           {
             minDate: new Date(),
-            opens: "left",
+            opens: "center",
+            alwaysShowCalendars: true,
+            isInvalidDate: function (date) {
+              for (let holiday of holidays) {
+                if (
+                  new Date(holiday).toDateString() ==
+                  new Date(date).toDateString()
+                ) {
+                  return true;
+                }
+              }
+
+              if (
+                new Date(date).getDay() === 0 ||
+                new Date(date).getDay() == 6
+              ) {
+                days++;
+
+                return true;
+              } else {
+                return false;
+              }
+            },
           },
           function (start, end, label) {
             window.parent.postMessage(
