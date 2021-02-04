@@ -71,8 +71,12 @@
                 event: {
                     code: "data",
                     data: {
-                        startDate: start,
-                        endDate:end
+                        startDate: start.format(
+                "YYYY-MM-DD"
+              )},
+                        endDate:end.format(
+                "YYYY-MM-DD"
+              )}
                     },
                 },
             }),
